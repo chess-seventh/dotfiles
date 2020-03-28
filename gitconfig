@@ -15,11 +15,11 @@
     ploh      = pull origin HEAD
 
     # COMMITS
-    ca        = commit -a
-    caa       = commit -a --amend
-    caw       = commit -a --message=WIP
-    cm        = commit -m
-    cam       = commit -am
+    ca        = commit -S -a
+    caa       = commit -S -a --amend
+    caw       = commit -S -a --message=WIP
+    cm        = commit -S -m
+    cam       = commit -S -am
 
     ap        = add -p
 
