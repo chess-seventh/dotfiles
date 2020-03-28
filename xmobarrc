@@ -1,1 +1,39 @@
-../.dotfiles/xmobarrc
+Config {
+         font = "xft:Inconsolata Nerd Font-13"
+       , bgColor = "#6666ff"
+       , fgColor = "#99b3ff"
+       , position = Top
+       , pickBroadest = True
+       , lowerOnStart = True
+       , borderColor = "#ffffff"
+       , hideOnStart = False
+       , allDesktops = False
+       , additionalFonts = []
+       , textOffsets = []
+       , persistent = True
+       , iconRoot = ""
+       , commands = [ Run Cpu [ "-t", "<total>%"
+                              , "-L","3","-H","50"
+                              , "--normal","#AFD700,#6666ff","--high","#FF8700,#1F1F1F"
+                              ] 10
+                    , Run Memory ["-t","<usedratio>%"] 10
+                    , Run Com "date" ["+%a %_d %b %Y"] "date" 600
+                    , Run StdinReader
+                    , Run Network "enp4s0" [ "-t", "  <rx> KB  <tx> KB"
+                                           , "-x", "N/A"
+                                           ] 5
+
+
+                    , Run DiskU [("/home", "<usedp>% / <size>")]
+                        ["-L", "0", "-H", "90", "-n", "green", "-h", "orange", "-b", "="] 22
+                    , Run Network "enp6s0" [ "-t", "  <rx> KB  <tx> KB"
+                                           , "-x", "N/A"
+                                           ] 5
+                    , Run Com "date" ["+%H:%M:%S"] "time" 10
+                    , Run MPD ["-t", "<artist>  <title>", "--", "-h", "0.0.0.0", "-p", "6600"] 10
+                    , Run Com "/bin/bash" ["-c", "~/.bin/unreadmails.sh"] "mails" 60
+                    , Run Com "/bin/bash" ["-c", "~/.bin/getvol.sh"]  "myvolume" 30
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+               , template = "<fc=#99b3ff,#002080> </fc><fc=#002080,#99b3ff></fc><fc=#002080,#99b3ff> %enp4s0% %enp6s0% </fc><fc=#99b3ff,#002080></fc><fc=#99b3ff,#002080> %cpu% </fc><fc=#002080,#99b3ff> %memory% </fc><fc=#99b3ff,#002080></fc><fc=#99b3ff,#002080> %disku% </fc><fc=#002080,#99b3ff></fc><fc=#002090,#99b3ff> %mails% </fc><fc=#99b3ff></fc>} <fc=#002080,#6666ff></fc><fc=#99b3ff,#002080> %StdinReader% </fc><fc=#002080,#6666ff></fc> {<fc=#002080></fc><fc=#99b3ff,#002080> %myvolume% </fc><fc=#99b3ff,#002080></fc><fc=#002080,#99b3ff> %mpd% </fc><fc=#002080,#99b3ff></fc><fc=#99b3ff,#002080> %date%  %time% </fc><fc=#99b3ff,#002080></fc>" }
