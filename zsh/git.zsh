@@ -262,3 +262,5 @@ fcs() {
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
+alias muttgit='neomutt -F ~/.neomutt/muttrc-git'
+
