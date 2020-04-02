@@ -152,3 +152,6 @@ fcat () {
         fzf --preview 'cat {}'
 }
 
+eip() {
+        curl http://ifconfig.me
+}
