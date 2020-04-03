@@ -22,7 +22,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'flazz/vim-colorschemes'
-" ADDRESS BOOK
+
+" PERSONAL WIKI
+Plug 'vimwiki/vimwiki'
+
 
 "
 "SNIPETS
