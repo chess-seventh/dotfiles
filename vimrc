@@ -223,7 +223,7 @@ let g:syntastic_zsh_checkers = ['zsh']
 " NAVIGATION
 " ===========================
 " ===========================
-" move between "splits
+" move between splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -247,12 +247,6 @@ let g:SimpylFold_docstring_preview=1
 " imap <c-x><c-f> <plug>(fzf-complete-path)
 " imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 " imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
 
 " Default fzf layout
 " - down / up / left / right
@@ -375,54 +369,55 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets th
 " ===========================
 " Vim Markdown preview command remapping
 let mapleader = ","
-nmap <leader>ne :NERDTree<CR>
+nmap <leader>nn :NERDTree<CR>
+nmap <leader>st :SyntasticToggleMode<CR>
+
+nmap <leader>t :bo terminal<CR>
+hi Terminal ctermbg=333333
+
+" Buffers management
 nmap <leader>bn :bn<CR>
 nmap <leader>bp :bp<CR>
+nmap <leader>bd :bd<CR>
+
+" Resizing
 nmap <leader>= :vertical resize +5<CR>
 nmap <leader>- :vertical resize -5<CR>
-nmap <leader>st :SyntasticToggleMode<CR>
-nmap <leader>b :Buffers<CR>
+
+" Fuzzy Search
 nmap <leader>f :Files<CR>
-"nmap <leader>T :Tags<CR>
-"nmap <leader>t :BTags<CR>
-"nmap <leader>s :Ag<CR>
-" nnoremap <leader>s :ToggleWorkspace<CR>
-nmap <leader>s :ToggleWorkspace<CR>
+nmap <leader>B :Buffers<CR>
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-b': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Git shortcuts
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>ga :Gadd<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gst :Gstatus<CR>
 
+" Tags
 nmap <F9> :TagbarToggle<CR>
-nmap <leader>t :bo 15sp +terminal<CR>
+nmap <leader>ct :!ctags . -R<CR>
 
-nmap <leader>ct :call CreateTags()<CR>
-"
-" CTAGS
-"
-function CreateTags()
-    let curNodePath = g:NERDTreeFileNode.GetSelected().path.str()
-    exec ':!ctags -R --languages=python -f ' . curNodePath . '/tags ' . curNodePath
-endfunction
+" Make file directory the current working directory
+nmap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-"
-" SESSIONS !
-let g:workspace_create_new_tabs = 0  " enabled = 1 (default), disabled = 0
-let g:workspace_session_directory = $HOME . '/.vim/sessions/'
-let g:workspace_session_name = 'session.vim'
-let g:workspace_autosave_always = 1
-let g:workspace_autosave_ignore = ['gitcommit']
+" TABs Management
+nmap <leader>tn :tabnew<cr>
+nmap <leader>to :tabonly<cr>
+nmap <leader>tc :tabclose<cr>
 
-
-" resize pane
-if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
-endif
-
-"""
-" NOTMUCH ADDRESS BOOK
-"""
+" SESSIONS
+" let g:workspace_create_new_tabs = 0  " enabled = 1 (default), disabled = 0
+" let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+" let g:workspace_session_name = 'session.vim'
+" let g:workspace_autosave_always = 1
+" let g:workspace_autosave_ignore = ['gitcommit']
 
 autocmd BufWritePre * :%s/\s\+$//e
 "Git add - remove commands...
