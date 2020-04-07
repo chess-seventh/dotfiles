@@ -95,6 +95,7 @@ set expandtab
 set number
 set cursorline
 set laststatus=2
+set relativenumber
 "
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
