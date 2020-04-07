@@ -96,6 +96,8 @@ set number
 set cursorline
 set laststatus=2
 set relativenumber
+set shell=/usr/bin/zsh
+
 "
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -221,7 +223,7 @@ let g:syntastic_zsh_checkers = ['zsh']
 " NAVIGATION
 " ===========================
 " ===========================
-" move between splits
+" move between "splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -374,16 +376,16 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets th
 " Vim Markdown preview command remapping
 let mapleader = ","
 nmap <leader>ne :NERDTree<CR>
-nmap <leader>bn :n<CR>
-nmap <leader>bp :p<CR>
+nmap <leader>bn :bn<CR>
+nmap <leader>bp :bp<CR>
 nmap <leader>= :vertical resize +5<CR>
 nmap <leader>- :vertical resize -5<CR>
 nmap <leader>st :SyntasticToggleMode<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>f :Files<CR>
-nmap <leader>T :Tags<CR>
-nmap <leader>t :BTags<CR>
-nmap <leader>s :Ag<CR>
+"nmap <leader>T :Tags<CR>
+"nmap <leader>t :BTags<CR>
+"nmap <leader>s :Ag<CR>
 " nnoremap <leader>s :ToggleWorkspace<CR>
 nmap <leader>s :ToggleWorkspace<CR>
 nmap <leader>gd :Gdiff<CR>
@@ -392,7 +394,9 @@ nmap <leader>gc :Gcommit<CR>
 nmap <leader>gst :Gstatus<CR>
 
 nmap <F9> :TagbarToggle<CR>
+nmap <leader>t :bo 15sp +terminal<CR>
 
+nmap <leader>ct :call CreateTags()<CR>
 "
 " CTAGS
 "
@@ -401,7 +405,6 @@ function CreateTags()
     exec ':!ctags -R --languages=python -f ' . curNodePath . '/tags ' . curNodePath
 endfunction
 
-nmap <leader>ct :call CreateTags()<CR>
 "
 " SESSIONS !
 let g:workspace_create_new_tabs = 0  " enabled = 1 (default), disabled = 0
