@@ -1,5 +1,6 @@
 [commit]
    template = ~/.gitmessage
+	gpgsign = true
 [alias]
     # current working tree status using the short format
     s = status
@@ -13,6 +14,7 @@
     # nice git pull
     up        = "!git remote update -p; git merge --ff-only @{u}"
     ploh      = pull origin HEAD
+    ploqa     = pull origin release/qa
 
     # COMMITS
     ca        = commit -S -a
@@ -30,10 +32,14 @@
     conflicts = !git diff --name-only | uniq | xargs vim
     recent    = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
     chom      = checkout master
+    choqa     = checkout release/qa
+
     # show a nice log commit tree
     l = log --pretty=oneline -n 20 --graph --abbrev-commit | less -r
+
     # diff between the latest commit and the current state
     d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat --color=always" | less -r
+
     # show top commiters
     contributors = shortlog --summary --numbered
 
@@ -54,6 +60,7 @@
     rum       = rebase -i upstream/master
     pr        = pull --rebase
     prom      = pull --rebase origin master
+    proqa     = pull --rebase origin release/qa
 
     # FETCH
     fo        = fetch origin
@@ -75,3 +82,7 @@
 [user "bmbitbucket"]
 	name = Francesco Piva
 	email = francesco.piva@bestmile.com
+[user "gitlab"]
+	name = Chess Seventh
+	email = chess7th@pm.me
+	signingkey = 4FEA2BF1886E8EA6
